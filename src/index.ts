@@ -2,7 +2,7 @@ import * as OpenCC from "opencc-js";
 
 interface CensorCheckResult {
   result: boolean;
-  list: string[];
+  list: Set<string>;
 }
 const preConversionCheckList = [
   "+1s",
@@ -51,7 +51,7 @@ function sanitize(text: string): string {
 }
 
 export function censorCheck(text: string): CensorCheckResult {
-  const list: string[] = [];
+  const list: Set<string> = new Set();
   if (!text) {
     return {
       result: false,
@@ -61,7 +61,7 @@ export function censorCheck(text: string): CensorCheckResult {
 
   for (const word of preConversionCheckList) {
     if (text.includes(word)) {
-      list.push(word);
+      list.add(word);
     }
   }
 
@@ -73,11 +73,11 @@ export function censorCheck(text: string): CensorCheckResult {
       continue;
     } else if (delimiter.test(word)) {
       if (word.split(delimiter).reduce((a, b) => a && text.includes(b), true)) {
-        list.push(word);
+        list.add(word);
       }
     } else {
       if (text.includes(word)) {
-        list.push(word);
+        list.add(word);
       }
     }
   }
@@ -85,12 +85,12 @@ export function censorCheck(text: string): CensorCheckResult {
   (text.match(tabooRegExp) || []).forEach((m) => {
     //@ts-ignore
     if (!(whiteList as string[]).includes(m)) {
-      list.push(m);
+      list.add(m);
     }
   });
 
   return {
-    result: list.length ? true : false,
+    result: list.size ? true : false,
     list,
   };
 }
