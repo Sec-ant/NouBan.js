@@ -53,14 +53,13 @@ module.exports = [
     ...defaultConfigs,
     externals: {
       "opencc-js": "OpenCC",
-      "./wordsArray": "wordsArray",
-      "./whiteList": "whiteList",
     },
     output: {
       ...defaultConfigs.output,
       filename: "nouban.js",
     },
   },
+  /*
   {
     ...defaultConfigs,
     output: {
@@ -68,4 +67,5 @@ module.exports = [
       filename: "nouban.bundle.js",
     },
   },
+  */
 ];

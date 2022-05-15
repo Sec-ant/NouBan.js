@@ -1,12 +1,9 @@
-import wordsArray from "./wordsArray";
-import whiteList from "./whiteList";
 import * as OpenCC from "opencc-js";
 
 interface CensorCheckResult {
   result: boolean;
   list: string[];
 }
-
 const preConversionCheckList = [
   "+1s",
   "5\xb11",
@@ -70,6 +67,7 @@ export function censorCheck(text: string): CensorCheckResult {
 
   sanitize(text);
 
+  //@ts-ignore
   for (const word of wordsArray as string[]) {
     if (word.includes("#")) {
       continue;
@@ -85,6 +83,7 @@ export function censorCheck(text: string): CensorCheckResult {
   }
 
   (text.match(tabooRegExp) || []).forEach((m) => {
+    //@ts-ignore
     if (!(whiteList as string[]).includes(m)) {
       list.push(m);
     }
