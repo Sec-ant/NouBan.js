@@ -1,6 +1,6 @@
 import wordsArray from "./wordsArray";
 import whiteList from "./whiteList";
-import { Converter } from "opencc-js";
+import * as OpenCC from "opencc-js";
 
 interface CensorCheckResult {
   result: boolean;
@@ -45,7 +45,7 @@ const tabooRegExp = new RegExp(
 );
 
 const delimiter = /&&|\+\+/;
-const convert = Converter({ from: "t", to: "cn" });
+const convert = OpenCC.Converter({ from: "t", to: "cn" });
 
 function sanitize(text: string): string {
   return convert(
