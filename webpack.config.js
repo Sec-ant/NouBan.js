@@ -25,7 +25,7 @@ const defaultConfigs = {
     path: path.resolve(__dirname, "dist"),
     library: "NouBan",
     libraryTarget: "umd",
-    globalObject: "this",
+    globalObject: "window",
     publicPath: "",
   },
   optimization: {
