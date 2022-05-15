@@ -1,5 +1,5 @@
-// @ts-ignore
-import { wordsArray, whiteList } from "./censoredWords";
+import wordsArray from "./wordsArray";
+import whiteList from "./whiteList";
 import { Converter } from "opencc-js";
 
 interface CensorCheckResult {

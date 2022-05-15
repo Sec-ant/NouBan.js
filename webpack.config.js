@@ -2,7 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 const TerserPlugin = require("terser-webpack-plugin");
 
-module.exports = {
+const defaultConfigs = {
   entry: "./src/index.ts",
   mode: "production",
   module: {
@@ -25,7 +25,6 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     library: "NouBan",
     libraryTarget: "umd",
-    filename: "nouban.js",
     globalObject: "this",
     publicPath: "",
   },
@@ -48,3 +47,25 @@ module.exports = {
     }),
   ],
 };
+
+module.exports = [
+  {
+    ...defaultConfigs,
+    externals: {
+      "opencc-js": "OpenCC",
+      "./wordsArray": "wordsArray",
+      "./whiteList": "whiteList",
+    },
+    output: {
+      ...defaultConfigs.output,
+      filename: "nouban.js",
+    },
+  },
+  {
+    ...defaultConfigs,
+    output: {
+      ...defaultConfigs.output,
+      filename: "nouban.bundle.js",
+    },
+  },
+];
