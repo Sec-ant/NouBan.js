@@ -1,7 +1,7 @@
 const nodeFetch = require("node-fetch");
 
 const censoredWordsUrl =
-  "https://cdn.jsdelivr.net/gh/drrouen/NouBan-js/censoredWords.js";
+  "https://fastly.jsdelivr.net/gh/drrouen/NouBan-js/censoredWords.js";
 
 module.exports = async function () {
   const censoredWords = await new Promise(async (resolve, reject) => {
